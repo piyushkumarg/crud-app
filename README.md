@@ -1,7 +1,7 @@
 # crud-app 
 simple CRUD-app that can add, read, update, or delete users information.
 
-https://crud-app-180375.netlify.app/register
+https://crud-app-180375.netlify.app/
 
 ![image](https://user-images.githubusercontent.com/83285872/203164988-6f3719ef-5f6c-4b75-a63f-a30512a8e98b.png)
 
