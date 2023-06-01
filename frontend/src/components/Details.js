@@ -19,7 +19,7 @@ const Details = () => {
   const nevigate = useNavigate();
 
   const getdata = async () => {
-    const res = await fetch(`https://crud9798.herokuapp.com/getuser/${id}`, {
+    const res = await fetch(`/getuser/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const Details = () => {
     const data = await res.json();
     console.log("hereisdata", data);
 
-    if (res.status === 422 || !data) {
+    if (res.status === 404 || !data) {
       console.log("error ");
     } else {
       setUserdata(data);
@@ -43,7 +43,7 @@ const Details = () => {
 
   const deleteuser = async (id) => {
     const res2 = await fetch(
-      `https://crud9798.herokuapp.com/deleteuser/${id}`,
+      `/deleteuser/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -55,7 +55,7 @@ const Details = () => {
     const deletedata = await res2.json();
     console.log(deletedata);
 
-    if (res2.status === 422 || !deletedata) {
+    if (res2.status === 404 || !deletedata) {
       console.log("error");
     } else {
       console.log("user deleted");

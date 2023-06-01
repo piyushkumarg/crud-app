@@ -14,7 +14,7 @@ const Home = () => {
   const { dltdata, setDLTdata } = useContext(deldata);
 
   const getdata = async () => {
-    const res = await fetch("https://crud9798.herokuapp.com/getdata", {
+    const res = await fetch("/getdata", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const Home = () => {
     const data = await res.json();
     console.log(data);
 
-    if (res.status === 422 || !data) {
+    if (res.status === 404 || !data) {
       console.log("error ");
     } else {
       setUserdata(data);
@@ -38,7 +38,7 @@ const Home = () => {
 
   const deleteuser = async (id) => {
     const res2 = await fetch(
-      `https://crud9798.herokuapp.com/deleteuser/${id}`,
+      `/deleteuser/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -50,7 +50,7 @@ const Home = () => {
     const deletedata = await res2.json();
     console.log(deletedata);
 
-    if (res2.status === 422 || !deletedata) {
+    if (res2.status === 404 || !deletedata) {
       console.log("error");
     } else {
       console.log("user deleted");
@@ -64,13 +64,13 @@ const Home = () => {
       {udata ? (
         <>
           <div
-            class="alert alert-success alert-dismissible fade show"
+            className="alert alert-success alert-dismissible fade show"
             role="alert"
           >
             <strong>{udata.name}</strong> added succesfully!
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
             ></button>
@@ -82,13 +82,13 @@ const Home = () => {
       {updata ? (
         <>
           <div
-            class="alert alert-success alert-dismissible fade show"
+            className="alert alert-success alert-dismissible fade show"
             role="alert"
           >
             <strong>{updata.name}</strong> updated succesfully!
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
             ></button>
@@ -101,13 +101,13 @@ const Home = () => {
       {dltdata ? (
         <>
           <div
-            class="alert alert-danger alert-dismissible fade show"
+            className="alert alert-danger alert-dismissible fade show"
             role="alert"
           >
             <strong>{dltdata.name}</strong> deleted succesfully!
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
             ></button>

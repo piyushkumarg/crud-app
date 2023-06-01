@@ -8,11 +8,10 @@ const users = require("../models/userSchema");
 
 //register user
 router.post("/register", async (req, res) => {
-  // console.log(req.body);
   const { name, email, age, mobile, work, add, desc } = req.body;
 
   if (!name || !email || !age || !mobile || !work || !add || !desc) {
-    res.status(422).json("plz fill the data");
+    return res.status(400).json("Please fill in all the required fields");
   }
 
   try {
@@ -20,24 +19,25 @@ router.post("/register", async (req, res) => {
     console.log(preuser);
 
     if (preuser) {
-      res.status(422).json("this is user is already present");
-    } else {
-      const adduser = new users({
-        name,
-        email,
-        age,
-        mobile,
-        work,
-        add,
-        desc,
-      });
-
-      await adduser.save();
-      res.status(201).json(adduser);
-      console.log(adduser);
+      return res.status(400).json("This user already exists");
     }
+
+    const adduser = new users({
+      name,
+      email,
+      age,
+      mobile,
+      work,
+      add,
+      desc,
+    });
+
+    await adduser.save();
+    console.log(adduser);
+    return res.status(201).json(adduser);
   } catch (error) {
-    res.status(422).json(error);
+    console.log(error);
+    return res.status(500).json("Internal Server Error");
   }
 });
 
@@ -48,7 +48,7 @@ router.get("/getdata", async (req, res) => {
     res.status(201).json(userdata);
     console.log(userdata);
   } catch (error) {
-    res.status(422).json(error);
+    res.status(404).json(error);
   }
 });
 
@@ -62,7 +62,7 @@ router.get("/getuser/:id", async (req, res) => {
     console.log(userindividual);
     res.status(201).json(userindividual);
   } catch (error) {
-    res.status(422).json(error);
+    res.status(404).json(error);
   }
 });
 
@@ -78,7 +78,7 @@ router.patch("/updateuser/:id", async (req, res) => {
     console.log(updateduser);
     res.status(201).json(updateduser);
   } catch (error) {
-    res.status(422).json(error);
+    res.status(404).json(error);
   }
 });
 
@@ -91,7 +91,7 @@ router.delete("/deleteuser/:id", async (req, res) => {
     console.log(deletuser);
     res.status(201).json(deletuser);
   } catch (error) {
-    res.status(422).json(error);
+    res.status(404).json(error);
   }
 });
 

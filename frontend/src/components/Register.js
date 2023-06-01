@@ -33,7 +33,7 @@ const Register = () => {
 
     const { name, email, work, add, mobile, desc, age } = inpval;
 
-    const res = await fetch("https://crud9798.herokuapp.com/register", {
+    const res = await fetch("/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,9 +52,9 @@ const Register = () => {
     const data = await res.json();
     console.log(data);
 
-    if (res.status === 422 || !data) {
+    if (res.status === 400 || !data) {
       console.log("error ");
-      alert("error");
+      alert("Error: " + res.status);
     } else {
       nevigate("/");
       setUdata(data);
@@ -66,8 +66,8 @@ const Register = () => {
     <div className="container">
       <form className="mt-4">
         <div className="row">
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputEmail1" class="form-label">
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputEmail1" className="form-label">
               Name
             </label>
             <input
@@ -75,13 +75,13 @@ const Register = () => {
               value={inpval.name}
               onChange={setdata}
               name="name"
-              class="form-control"
+              className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
           </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" className="form-label">
               email
             </label>
             <input
@@ -89,12 +89,12 @@ const Register = () => {
               value={inpval.email}
               onChange={setdata}
               name="email"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
             />
           </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" className="form-label">
               age
             </label>
             <input
@@ -102,12 +102,12 @@ const Register = () => {
               value={inpval.age}
               onChange={setdata}
               name="age"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
             />
           </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" className="form-label">
               Mobile
             </label>
             <input
@@ -115,12 +115,12 @@ const Register = () => {
               value={inpval.mobile}
               onChange={setdata}
               name="mobile"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
             />
           </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" className="form-label">
               Work
             </label>
             <input
@@ -128,12 +128,12 @@ const Register = () => {
               value={inpval.work}
               onChange={setdata}
               name="work"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
             />
           </div>
-          <div class="mb-3 col-lg-6 col-md-6 col-12">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3 col-lg-6 col-md-6 col-12">
+            <label for="exampleInputPassword1" className="form-label">
               Address
             </label>
             <input
@@ -141,12 +141,12 @@ const Register = () => {
               value={inpval.add}
               onChange={setdata}
               name="add"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
             />
           </div>
-          <div class="mb-3 col-lg-12 col-md-12 col-12">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3 col-lg-12 col-md-12 col-12">
+            <label for="exampleInputPassword1" className="form-label">
               Description
             </label>
             <textarea
@@ -160,7 +160,11 @@ const Register = () => {
             ></textarea>
           </div>
 
-          <button type="submit" onClick={addinpdata} class="btn btn-primary">
+          <button
+            type="submit"
+            onClick={addinpdata}
+            className="btn btn-primary"
+          >
             Submit
           </button>
         </div>
